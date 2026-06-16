@@ -1,6 +1,6 @@
 # Brain Tumor Data Augmentation — WGAN-GP + U-Net
 
-> A two-stage deep learning pipeline for synthetic brain MRI data augmentation. A WGAN-GP generates realistic brain tumor images, and a U-Net automatically predicts segmentation masks for each generated image.
+> A two-stage deep learning pipeline for synthetic brain MRI data augmentation. A WGAN-GP generates realistic brain tumor images (FID 72.4), and a U-Net automatically predicts segmentation masks for each generated image (Dice 0.845, IoU 0.735). Trained the WGAN-GP for 1,500 epochs on 3,000 MRI images augmented to 9,000 samples, and the U-Net for 20 epochs on 3,000 images augmented to 15,000 samples.
 
 ---
 
@@ -77,6 +77,7 @@ project/
 │   ├── model.py              # Generator and Discriminator architectures
 │   ├── train.py              # Per-step training functions and main loop
 │   ├── visualize.py          # Sample saving and loss curve plotting
+│   ├── evaluation.py         # FID metric computation for generated images
 │   └── run_train.py          # Entry point for WGAN-GP training
 │
 ├── unet/                     # Segmentation model
@@ -90,6 +91,7 @@ project/
 │   └── run_train.py          # Entry point for U-Net training
 │
 ├── inference.py              # Full pipeline: generate images → predict masks
+├── inference2.py             # Full pipeline but inference WGAN-GP using .h5 weights
 ├── requirements.txt
 └── README.md
 ```
@@ -206,7 +208,7 @@ Results are saved as paired `generated_XXXX.png` / `mask_XXXX.png` files and vis
 | `IMG_HEIGHT / IMG_WIDTH` | 128 | Generated image resolution |
 | `LATENT_DIM` | 128 | Noise vector size |
 | `BATCH_SIZE` | 64 | Training batch size |
-| `EPOCHS` | 300 | Total training epochs |
+| `EPOCHS` | 1500 | Total training epochs |
 | `N_CRITIC` | 5 | Discriminator steps per generator step |
 | `LAMBDA_GP` | 10 | Gradient penalty weight |
 | `LR_G / LR_D` | 1e-4 | Adam learning rates |
