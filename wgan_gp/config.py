@@ -17,7 +17,7 @@ AUGMENTATION_FACTOR   = 1   # Total images created per original (1 original + 4 
 LATENT_DIM = 128
 
 # ── Training settings ─────────────────────────────────────────────────────────
-EPOCHS    = 300
+EPOCHS    = 1500
 N_CRITIC  = 5
 LAMBDA_GP = 10
 LR_G      = 1e-4
